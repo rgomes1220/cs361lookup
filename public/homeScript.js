@@ -6,7 +6,6 @@ $(document).ready(function(){
     $("#showSurveyPrompt").modal('show');
     $("#getfactbutton").click(function(){
         let currFact = $("#nameHolder").html();
-        window.location = "/home?action=showSurvey&currFact="+currFact;
+        window.location = "/home?currFact="+currFact;
     });
 });
-
