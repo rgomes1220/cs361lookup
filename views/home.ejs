@@ -1,5 +1,9 @@
 <%include partials/navbar%>
 
+<script type="text/javascript" src="homeScript.js"></script>
+
+
+
 <!-- Modal -->
 <div class="modal fade" id=<%= showSurveyPrompt %> tabindex="-1" role="dialog" >
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -23,14 +27,13 @@
 
 
 
-<h4>Welcome to the homepage Project Lookup for CS 361!!!</h4>
+
 <h2>Fact of the Day</h2>
-<h3><%= name %></h3>
+<h3 id="nameHolder"><%= name %></h3>
 <img src="<%= image %>">
 <p><br><b>Description:</b> <br><%= description %></p>
 <p><b>Location:</b> <br><%= location %></p>
-
-
+<button id="getfactbutton" class="btn btn-lg btn-primary btn-block" >Get Another Fact</button>
 
 
 

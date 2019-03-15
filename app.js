@@ -12,9 +12,11 @@ app.set("view engine", "ejs")
 //serve public directory
 app.use(express.static("public"));
 
+
 app.get("/", function (req, res) {
   res.render("login", { showMsg: "" });
 })
+
 
 app.get("/home", function (req, res) {
   var act = ""
@@ -24,18 +26,34 @@ app.get("/home", function (req, res) {
     act = "noSurveyPrompt"
   }
 
-  mysql.pool.query('SELECT name,image,description,location FROM plants ORDER BY RAND() LIMIT 1', function(err, results,fields){
-    if(err){
-      next(err);
-      return;
-    }
-    /*console.log(results);
-    console.log("name: "+results[0].name);
-    console.log("img: "+results[0].image);
-    console.log("desc: "+results[0].description);
-    console.log("loc: "+results[0].location);*/
-    res.render("home", { showSurveyPrompt: act, name: results[0].name, image: results[0].image, description: results[0].description, location: results[0].location });
-  })
+  if(req.query.currFact){
+    mysql.pool.query('SELECT name,image,description,location FROM plants WHERE name <> ? ORDER BY RAND() LIMIT 1', [req.query.currFact], function(err, results,fields){
+      if(err){
+        next(err);
+        return;
+      }
+      /*console.log(results);
+      console.log("name: "+results[0].name);
+      console.log("img: "+results[0].image);
+      console.log("desc: "+results[0].description);
+      console.log("loc: "+results[0].location);*/
+      res.render("home", { showSurveyPrompt: act, name: results[0].name, image: results[0].image, description: results[0].description, location: results[0].location });
+    })
+  }else{
+    mysql.pool.query('SELECT name,image,description,location FROM plants ORDER BY RAND() LIMIT 1', function(err, results,fields){
+      if(err){
+        next(err);
+        return;
+      }
+      /*console.log(results);
+      console.log("name: "+results[0].name);
+      console.log("img: "+results[0].image);
+      console.log("desc: "+results[0].description);
+      console.log("loc: "+results[0].location);*/
+      res.render("home", { showSurveyPrompt: act, name: results[0].name, image: results[0].image, description: results[0].description, location: results[0].location });
+    })
+  }
+
 
 })
 
