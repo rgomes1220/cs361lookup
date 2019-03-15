@@ -13,9 +13,6 @@
     color: white;
 }
 
-
-
-
 /* login form */
 .form-signin {
   max-width: 330px;
@@ -28,10 +25,13 @@
     border-color: #9370DB;
 }
 
-
-
-
 #updateDBButton.btn-primary{
     background-color: #f45042;
     border-color: #f45042;
+}
+
+.imgcenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
